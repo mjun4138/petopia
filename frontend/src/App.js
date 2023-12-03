@@ -7,7 +7,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          petopla에 오신 것을 환영합니다.
+          petopia에 오신 것을 환영합니다.
+          애완동물의 사진을 공유하고 자랑해보세요.
         </p>
       </header>
     </div>
