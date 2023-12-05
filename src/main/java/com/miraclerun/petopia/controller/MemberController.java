@@ -15,14 +15,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
 public class MemberController {
     private final MemberService memberService;
 
     /**
      * 회원가입
      */
-    @PostMapping("/member")
+    @PostMapping("/members")
     public CreateMemberResponse join(@RequestBody CreateMemberRequest request) {
         Long memberId = memberService.createMember(request);
 
@@ -34,7 +33,7 @@ public class MemberController {
     /**
      * 회원 단건 조회
      */
-    @GetMapping("/member/{memberId}")
+    @GetMapping("/members/{memberId}")
     public MemberDto member(@PathVariable Long memberId) {
         Member member = memberService.getMember(memberId);
 
@@ -44,7 +43,7 @@ public class MemberController {
     /**
      * 회원 전체 조회
      */
-    @GetMapping("/member")
+    @GetMapping("/members")
     public GetMembersResponse members(@RequestParam int page) {
         GetMembersRequest request = GetMembersRequest.builder()
                 .page(page)
@@ -65,7 +64,7 @@ public class MemberController {
     /**
      * 회원 탈퇴
      */
-    @DeleteMapping("/member/{memberId}")
+    @DeleteMapping("/members/{memberId}")
     public void delete(@PathVariable Long memberId) {
 
         memberService.deleteMember(memberId);
