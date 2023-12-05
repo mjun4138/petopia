@@ -34,7 +34,7 @@ public class Member extends BaseTimeEntity {
     public Member() {
     }
 
-    // 생성 메서드
+    //==생성 메서드==//
     @Builder
     public Member(String name, String email, String account, String password) {
         this.name = name;
