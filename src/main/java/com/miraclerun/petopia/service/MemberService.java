@@ -3,6 +3,7 @@ package com.miraclerun.petopia.service;
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.repository.MemberRepository;
 import com.miraclerun.petopia.request.CreateMemberRequest;
+import com.miraclerun.petopia.request.GetMembersRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,18 @@ public class MemberService {
     /**
      * 회원 전체 조회
      */
-    public List<Member> getMembers() {
-        return memberRepository.findAll();
+    public List<Member> getMembers(GetMembersRequest request) {
+        return memberRepository.getMembers(request);
+    }
+
+    /**
+     * 회원 전체 페이지 수
+     */
+    public int getTotalPages(GetMembersRequest request) {
+        Long totalMembers = memberRepository.totalMembers();
+        int totalPages = (int) Math.ceil((double) totalMembers / request.getSize());
+
+        return totalPages;
     }
 
     /**
