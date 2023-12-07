@@ -28,7 +28,10 @@ public class Pet extends BaseTimeEntity {
     @Lob
     private String intro;
 
+    @NotNull
     private int following;
+
+    @NotNull
     private int follower;
 
 
