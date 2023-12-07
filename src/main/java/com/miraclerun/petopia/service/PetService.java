@@ -34,4 +34,15 @@ public class PetService {
 
         return pet.getId();
     }
+
+    /**
+     * 펫 삭제
+     */
+    @Transactional
+    public void deletePet(Long id) {
+        Pet pet = petRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+
+        petRepository.delete(pet);
+    }
 }

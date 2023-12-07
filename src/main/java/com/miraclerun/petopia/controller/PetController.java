@@ -5,10 +5,7 @@ import com.miraclerun.petopia.request.CreatePetRequest;
 import com.miraclerun.petopia.response.CreatePetResponse;
 import com.miraclerun.petopia.service.PetService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,4 +24,13 @@ public class PetController {
                 .build();
     }
 
+    /**
+     * 펫 삭제
+     */
+    @DeleteMapping("/pets/{petId}")
+    public void deletePet(
+            @PathVariable Long petId
+    ) {
+        petService.deletePet(petId);
+    }
 }
