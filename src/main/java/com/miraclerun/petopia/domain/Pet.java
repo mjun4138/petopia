@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter @Setter
 @Table(name = "pet")
@@ -26,6 +28,8 @@ public class Pet extends BaseTimeEntity {
     @Lob
     private String intro;
 
+    private int following;
+    private int follower;
 
 
     public Pet() {
@@ -37,5 +41,24 @@ public class Pet extends BaseTimeEntity {
         this.member = member;
         this.name = name;
         this.intro = intro;
+        following = 0;
+        follower = 0;
+    }
+
+    //==비즈니스 로직==//
+    public void addFollowing() {
+        following += 1;
+    }
+
+    public void addFollower() {
+        follower += 1;
+    }
+
+    public void subFollowing() {
+        following -= 1;
+    }
+
+    public void subFollower() {
+        follower -= 1;
     }
 }
