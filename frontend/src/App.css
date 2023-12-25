@@ -23,6 +23,10 @@
   overflow-y: auto;
   color: black;
 }
+/* 스크롤바 숨기기 */
+.feed-nav-container::-webkit-scrollbar {
+  display: none;
+}
 
 .right-nav-container {
   flex: 0.2;
