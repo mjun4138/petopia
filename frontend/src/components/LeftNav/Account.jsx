@@ -31,14 +31,14 @@ const Account = () => {
             <div className='pet-list'>
                 {petList.map((pet, index) => (
                     <div className='pet-item' key={index}>
-                        <img src={`${process.env.PUBLIC_URL}/image/${pet.image}`} alt="user image"/>
+                        <img src={`${process.env.PUBLIC_URL}/image/${pet.image}`} alt="pet image"/>
                         <div className='pet-name'>
                             <span>{pet.name}</span>
                         </div>
                     </div>
                 ))}
                 <div className='pet-add'>
-                    <img src={`${process.env.PUBLIC_URL}/image/add.png`} alt="user image"/>
+                    <img src={`${process.env.PUBLIC_URL}/image/add.png`} alt="add image"/>
                     <div className='pet-name'>
                         <span>펫 등록</span>
                     </div>

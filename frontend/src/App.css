@@ -1,5 +1,6 @@
 .App {
   display: flex;
+  height: 100vh;
   text-align: center;
 }
 
@@ -9,13 +10,22 @@
 }
 
 .left-nav-container {
+  flex: 0.2;
   width: 20vw;
   height: 100vh;
   color: black;
   border-right: 1px solid lightgray;
 }
 
+.feed-nav-container {
+  flex: 0.6;
+  width: 60vw;
+  overflow-y: auto;
+  color: black;
+}
+
 .right-nav-container {
+  flex: 0.2;
   width: 20vw;
   height: 100vh;
   color: black;
