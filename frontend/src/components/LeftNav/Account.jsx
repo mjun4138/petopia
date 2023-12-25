@@ -17,14 +17,19 @@ const Account = () => {
 
     return (
         <nav className='account'>
-            <div className='logo'>
-                펫토피아
-            </div>
+
+                <div className='logo'>
+                    <Link to={'/account'} className='logo-cursor'>
+                        <h1>petopia</h1>
+                    </Link>
+                </div>
+
+
 
             <div className='user-profile'>
                 <img src={`${process.env.PUBLIC_URL}/image/kang.jpg`} alt="user image"/>
                 <div className='user-name'>
-                    <h1>{userName}</h1>
+                    <h3>{userName}</h3>
                 </div>
             </div>
 
@@ -33,14 +38,14 @@ const Account = () => {
                     <div className='pet-item' key={index}>
                         <img src={`${process.env.PUBLIC_URL}/image/${pet.image}`} alt="pet image"/>
                         <div className='pet-name'>
-                            <span>{pet.name}</span>
+                            <h4>{pet.name}</h4>
                         </div>
                     </div>
                 ))}
                 <div className='pet-add'>
                     <img src={`${process.env.PUBLIC_URL}/image/add.png`} alt="add image"/>
                     <div className='pet-name'>
-                        <span>펫 등록</span>
+                        <h4>펫 등록</h4>
                     </div>
                 </div>
             </div>
@@ -48,7 +53,7 @@ const Account = () => {
             <div className='setting'>
                 <button>설정</button>
 
-                    <Link onClick={handleLogout} to={'/'} style={{textDecoration: 'none'}}>
+                    <Link onClick={handleLogout} to={'/'}>
                         <button>로그아웃</button>
                     </Link>
 

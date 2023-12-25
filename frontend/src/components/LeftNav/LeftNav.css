@@ -86,10 +86,16 @@
 }
 
 .logo {
-    font-size: 30px;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 80px;
+    width: 100%;
+    display: flex;
+    margin-bottom: 50px;
+    cursor: pointer;
+
+}
+
+.logo-cursor {
+    text-decoration: none;
+    color: black;
 }
 
 .user-profile {
@@ -125,6 +131,7 @@
     align-items: center;
     width: 100%;
     border-bottom: 1px solid lightgray;
+    cursor: pointer;
 
 }
 
@@ -146,6 +153,7 @@
     align-items: center;
     width: 100%;
     border-bottom: 1px solid lightgray;
+    cursor: pointer;
 }
 
 .pet-add img {
