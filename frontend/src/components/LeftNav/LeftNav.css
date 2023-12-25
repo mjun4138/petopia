@@ -1,0 +1,173 @@
+.left-nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+/**********************************************/
+.login-form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    width: 250px;
+}
+
+.login h1 {
+    margin-bottom: 50px;
+}
+
+.login input {
+    width: 97%;
+    height: 25px;
+    margin-bottom: 10px;
+
+}
+
+.login button {
+    width: 250px;
+    height: 35px;
+    margin: 10px 0 20px 0;
+    padding: 0;
+}
+
+.register {
+    padding: 20px 0 0 0;
+    width: 250px;
+    border-top: 1px solid lightgray;
+}
+
+.signup-form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    width: 250px;
+}
+
+.signup h1 {
+    margin-bottom: 50px;
+}
+
+.signup input {
+    width: 97%;
+    height: 25px;
+    margin-bottom: 10px;
+
+}
+
+.signup button {
+    width: 250px;
+    height: 35px;
+    margin: 10px 0 20px 0;
+    padding: 0;
+}
+
+/*************************************************/
+.account {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    font-size: 30px;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    width: 100%;
+}
+.user-profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 13px;
+}
+.user-name {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.pet-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid lightgray;
+    height: 405px;
+    overflow: auto;
+    width: 100%;
+}
+
+.pet-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+
+}
+
+.pet-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 10px 0 10px 10px;
+}
+
+.pet-name {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.pet-add {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.pet-add img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 10px 0 10px 10px;
+}
+
+.setting {
+    width: 100%;
+    margin-top: auto;
+}
+
+.setting button {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+right-nav {
+    background: white;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    color: black;
+    font-weight: 600;
+    border-left: 1px solid lightgray;
+    padding: 0 20px 0 20px;
+}
