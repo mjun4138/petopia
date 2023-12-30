@@ -77,6 +77,12 @@
     padding: 0;
 }
 
+.signup-error {
+    color: red;
+    margin-bottom: 20px;
+    font-size: 11px;
+}
+
 /*************************************************/
 .account {
     width: 70%;
