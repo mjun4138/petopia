@@ -15,18 +15,17 @@ public class Upload {
     @Column(name = "upload_id")
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "feed_id")
+    @JoinColumn(name = "feed_id", nullable = false)
     private Feed feed;
 
-    @NotNull
+    @Column(nullable = false)
     private String fileName;
 
-    @NotNull
+    @Column(nullable = false)
     private String filePath;
 
-    @NotNull
+    @Column(nullable = false)
     private Long fileSize;
 
     public Upload() {

@@ -17,21 +17,20 @@ public class Pet extends BaseTimeEntity {
     @Column(name = "pet_id")
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
     @Lob
     private String intro;
 
-    @NotNull
+    @Column(nullable = false)
     private int following;
 
-    @NotNull
+    @Column(nullable = false)
     private int follower;
 
 

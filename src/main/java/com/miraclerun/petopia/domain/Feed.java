@@ -18,20 +18,19 @@ public class Feed extends BaseTimeEntity {
     @Column(name = "feed_id")
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id")
+    @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 
-    @NotNull
+    @Column(nullable = false)
     @OneToMany(mappedBy = "feed", cascade = CascadeType.ALL)
     private List<Upload> uploads = new ArrayList<>();
 
-    @NotNull
+    @Column(nullable = false)
     @Lob
     private String content;
 
-    @NotNull
+    @Column(nullable = false)
     private int heartCount;
 
     public Feed() {
