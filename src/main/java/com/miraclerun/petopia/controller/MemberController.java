@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class MemberController {
     private final MemberService memberService;
 
