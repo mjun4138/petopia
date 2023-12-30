@@ -29,6 +29,10 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MemberRole role;
+
     public Member() {
     }
 
@@ -39,5 +43,6 @@ public class Member extends BaseTimeEntity {
         this.email = email;
         this.account = account;
         this.password = password;
+        this.role = MemberRole.User;
     }
 }
