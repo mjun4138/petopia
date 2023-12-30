@@ -7,6 +7,7 @@ import com.miraclerun.petopia.request.GetMembersRequest;
 import com.miraclerun.petopia.response.CreateMemberResponse;
 import com.miraclerun.petopia.response.GetMembersResponse;
 import com.miraclerun.petopia.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class MemberController {
      * 회원가입
      */
     @PostMapping("/members")
-    public CreateMemberResponse join(@RequestBody CreateMemberRequest request) {
+    public CreateMemberResponse join(@Valid @RequestBody CreateMemberRequest request) {
         Long memberId = memberService.createMember(request);
 
         return CreateMemberResponse.builder()
