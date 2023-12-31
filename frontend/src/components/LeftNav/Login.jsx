@@ -1,21 +1,54 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import axios from "axios";
+
+import {createMemberAPI, loginAPI} from "../../customAxios";
+import {useCookies} from "react-cookie";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [showSignUpClick, setSignUpClick] = useState(false)
 
+    const [cookies, setCookie] = useCookies();
+    const movePage = useNavigate();
+
     const LoginForm = () => {
+
+        const [loginRequest, setLoginRequest] = useState({
+            account: '',
+            password: ''
+        })
+
+        const handleChange = (e) => {
+            setLoginRequest({
+                ...loginRequest,
+                [e.target.name]: e.target.value
+            })
+        }
+
+        const loginMember = async () => {
+            try {
+                const response = await loginAPI(loginRequest)
+
+                localStorage.setItem('accessToken', response.data.accessToken)
+                setCookie('refreshToken', response.data.refreshToken, {path: '/'})
+
+
+                movePage('/account')
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
         return (
             <div className='login-form'>
                 <div className='login'>
                     <h1>petopia</h1>
-                    <input type="text" id='id' placeholder='아이디'/>
-                    <input type="password" id='pw' placeholder='비밀번호'/>
+                    <input type="text" name='account' placeholder='아이디' value={loginRequest.account} onChange={handleChange}/>
+                    <input type="password" name='password' placeholder='비밀번호' value={loginRequest.password} onChange={handleChange}/>
+                    <button onClick={loginMember}>
+                        로그인
+                    </button>
 
-                        <Link to={'/account'} style={{textDecoration: 'none'}}>
-                            <button>로그인</button>
-                        </Link>
 
                 </div>
 
@@ -28,7 +61,7 @@ const Login = () => {
     }
 
     const SignUpForm = () => {
-        const [createMemberRequest, setRequest] = useState({
+        const [createMemberRequest, setCreateMemberRequest] = useState({
             email: '',
             name: '',
             account: '',
@@ -43,7 +76,7 @@ const Login = () => {
         })
 
         const handleChange = (e) => {
-            setRequest({
+            setCreateMemberRequest({
                 ...createMemberRequest,
                 [e.target.name]: e.target.value
             })
@@ -51,7 +84,7 @@ const Login = () => {
 
         const createMember = async () => {
             try {
-                await axios.post("/api/members", createMemberRequest)
+                const response = createMemberAPI(createMemberRequest)
                 setSignUpClick(false)
                 alert("가입이 완료되었습니다.")
             } catch (error) {

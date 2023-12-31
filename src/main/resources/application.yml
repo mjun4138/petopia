@@ -23,3 +23,6 @@ logging:
 upload:
   path: C:\petopia_uploads\
 
+jwt:
+  secret: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwMzk2MzE3NSwiaWF0IjoxNzAzOTYzMTc1fQ.zbuEVY_B5WhW6uOXpN2O7GbaewFJF0Np43sBhLIrbIs
+

@@ -1,9 +1,11 @@
 package com.miraclerun.petopia.controller;
 
+import com.miraclerun.petopia.auth.JwtToken;
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.dto.MemberDto;
 import com.miraclerun.petopia.request.CreateMemberRequest;
 import com.miraclerun.petopia.request.GetMembersRequest;
+import com.miraclerun.petopia.request.LoginRequest;
 import com.miraclerun.petopia.response.CreateMemberResponse;
 import com.miraclerun.petopia.response.GetMembersResponse;
 import com.miraclerun.petopia.service.MemberService;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController

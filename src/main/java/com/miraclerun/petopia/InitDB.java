@@ -40,7 +40,7 @@ public class InitDB {
                         return Member.builder()
                                 .email("test" + i + "@petopia.com")
                                 .name("petopia" + i)
-                                .account("ptAccount" + i)
+                                .account("ptaccount" + i)
                                 .password(encoder.encode("petopia123"))
                                 .build();
                     })
