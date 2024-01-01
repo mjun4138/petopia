@@ -30,28 +30,41 @@ const setInterceptors = (instance) => {
 
     instance.interceptors.request.use(
         async (config) => {
-            const token = localStorage.getItem('accessToken');
-            const currentTime = Math.floor(Date.now() / 1000);
-            const exp = jwtDecode(token).exp
-
-            if (exp >= currentTime) {
-                config.headers.Authorization = `Bearer ${token}`
-            } else {
-                try {
-                    const memberId = JSON.parse(localStorage.getItem("memberData")).id
+            try {
+                const memberId = JSON.parse(localStorage.getItem("memberData")).id
+                const token = localStorage.getItem('accessToken');
+                if (token == null) {
                     const response = await refreshTokenAPI(memberId)
 
                     localStorage.setItem('accessToken', response.data)
                     const newToken = localStorage.getItem('accessToken')
                     config.headers.Authorization = `Bearer ${newToken}`
-                } catch (error) {
-                    if (error.response.status === 401) {
-                        window.location.href = '/'
+                    console.log("인터셉트0")
+                } else {
+                    const currentTime = Math.floor(Date.now() / 1000);
+                    const exp = jwtDecode(token).exp
+
+                    if (exp >= currentTime) {
+                        config.headers.Authorization = `Bearer ${token}`
+                        console.log("인터셉트1")
+                    } else {
+                        const response = await refreshTokenAPI(memberId)
+
+                        localStorage.setItem('accessToken', response.data)
+                        const newToken = localStorage.getItem('accessToken')
+                        config.headers.Authorization = `Bearer ${newToken}`
+                        console.log("인터셉트2")
+
                     }
-                    console.log(error);
                 }
 
+            } catch (error) {
+                if (error.response.status === 401) {
+                    window.location.href = '/'
+                }
+                console.log(error);
             }
+
 
             return config;
         },
