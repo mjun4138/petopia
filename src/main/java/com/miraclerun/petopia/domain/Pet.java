@@ -42,12 +42,21 @@ public class Pet extends BaseTimeEntity {
 
     //==생성메서드==//
     @Builder
-    public Pet(Member member, String name, String intro) {
+    public Pet(Member member, String name, String intro, PetUpload petUpload) {
         this.member = member;
         this.name = name;
         this.intro = intro;
         following = 0;
         follower = 0;
+        if (petUpload != null) {
+            setPetUpload(petUpload);
+        }
+    }
+
+    //==연관관계 메서드==//
+    public void petUpload(PetUpload petUpload) {
+        this.petUpload = petUpload;
+        petUpload.setPet(this);
     }
 
     //==비즈니스 로직==//

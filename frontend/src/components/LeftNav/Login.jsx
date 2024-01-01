@@ -4,6 +4,7 @@ import {createMemberAPI, loginAPI} from "../../customAxios";
 import {Cookies, useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
+import "./Login.css";
 
 const Login = () => {
     const [showSignUpClick, setSignUpClick] = useState(false)
@@ -48,7 +49,7 @@ const Login = () => {
 
         return (
             <div className='login-form'>
-                <div className='login'>
+                <div className='login-input'>
                     <h1>petopia</h1>
                     <input type="text" name='account' placeholder='아이디' value={loginRequest.account} onChange={handleChange}/>
                     <input type="password" name='password' placeholder='비밀번호' value={loginRequest.password} onChange={handleChange}/>
@@ -150,13 +151,13 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className='login'>
             {showSignUpClick ? (
                 <SignUpForm/>
             ) : (
                 <LoginForm/>
             )}
-        </>
+        </div>
     )
 }
 

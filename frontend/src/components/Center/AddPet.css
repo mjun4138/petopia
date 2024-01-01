@@ -1,0 +1,88 @@
+
+.add-pet {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-pet-back {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+
+}
+
+.add-pet-back img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin: 20px 0 0 20px;
+}
+
+.add-pet-form {
+    width: 55%;
+    height: 150px;
+    margin-top: 250px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    padding: 50px 10px 80px 10px;
+}
+
+.add-pet-input {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.add-pet-file {
+    flex: 0.4;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.add-pet-file img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid lightgray;
+    border-radius: 50%;
+}
+
+.add-pet-file span {
+    margin-top: 10px;
+    color: #0095f6;
+    font-weight: bold;
+}
+#file {
+    display: none;
+}
+
+.add-pet-info {
+    flex: 0.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.add-pet-info input {
+    width: 60%;
+    height: 10px;
+    padding: 10px;
+}
+.add-pet-info textarea {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 60%;
+    height: 50px;
+    padding: 10px;
+}
+
+.add-pet-register {
+    margin-top: 20px;
+}
+.add-pet-register button {
+    width: 30%;
+    height: 30px;
+}

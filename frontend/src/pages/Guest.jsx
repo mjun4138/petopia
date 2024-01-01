@@ -1,15 +1,15 @@
 import React from "react";
-import LeftNav from "../components/LeftNav/LeftNav";
-import Feed from "../components/Feed/Feed";
+import Feed from "../components/Center/Feed";
 import RightNav from "../components/RightNav/RightNav";
+import Login from "../components/LeftNav/Login";
 
 const Guest = () => {
     return (
         <>
             <div className='left-nav-container'>
-                <LeftNav isLoggedIn={false}/>
+                <Login/>
             </div>
-            <div className='feed-nav-container'>
+            <div className='center-container'>
                 <Feed/>
             </div>
             <div className='right-nav-container'>

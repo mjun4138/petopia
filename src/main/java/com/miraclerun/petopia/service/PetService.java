@@ -9,6 +9,7 @@ import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.repository.PetUploadRepository;
 import com.miraclerun.petopia.repository.UploadRepository;
 import com.miraclerun.petopia.request.CreatePetRequest;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class PetService {
      * 펫 등록
      */
     @Transactional
-    public Long createPet(CreatePetRequest request) {
+    public Long createPet(CreatePetRequest request,  MultipartFile file) throws IOException {
         Member member = memberRepository.findById(request.getMemberId())
                 .orElseThrow(RuntimeException::new);
 
@@ -44,6 +45,22 @@ public class PetService {
                 .intro(request.getIntro())
                 .build();
         petRepository.save(pet);
+
+        if (file != null) {
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            File saveFile = new File(uploadPath, fileName);
+            file.transferTo(saveFile);
+
+            PetUpload upload = PetUpload.builder()
+                    .pet(pet)
+                    .fileName(fileName)
+                    .filePath("/uploads/" + fileName)
+                    .fileSize(file.getSize())
+                    .build();
+            petUploadRepository.save(upload);
+        }
+
+
 
         return pet.getId();
     }

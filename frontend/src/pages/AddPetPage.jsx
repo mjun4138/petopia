@@ -1,20 +1,16 @@
 import React from "react";
 import RightNav from "../components/RightNav/RightNav";
 import Account from "../components/LeftNav/Account";
-import Feed from "../components/Center/Feed";
-import {Outlet} from "react-router-dom";
+import AddPet from "../components/Center/AddPet";
 
-const Main = () => {
+const AddPetPage = () => {
     return (
         <>
             <div className='left-nav-container'>
                 <Account/>
             </div>
-            {/*<div className='feed-nav-container'>*/}
-            {/*    <Feed/>*/}
-            {/*</div>*/}
-            <div className='center-container'>
-                <Outlet/>
+            <div className='feed-nav-container'>
+                <AddPet/>
             </div>
             <div className='right-nav-container'>
                 <RightNav/>
@@ -23,4 +19,4 @@ const Main = () => {
     )
 }
 
-export default Main
+export default AddPetPage

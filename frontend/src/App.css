@@ -17,7 +17,7 @@
   border-right: 1px solid lightgray;
 }
 
-.feed-nav-container {
+.center-container {
   flex: 0.6;
   width: 60vw;
   overflow-y: auto;

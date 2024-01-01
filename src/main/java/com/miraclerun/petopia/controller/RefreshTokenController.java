@@ -31,11 +31,12 @@ public class RefreshTokenController {
     @PostMapping(value = "/refresh-tokens/members/{memberId}")
     public ResponseEntity<String> refresh(
             @PathVariable Long memberId,
-            @CookieValue("refreshToken") String refreshToken
+            @CookieValue(value = "refreshToken", required = false) String refreshToken
         )
     {
         RefreshToken savedToken = refreshTokenRepository.findRefreshTokenByRefreshToken(refreshToken)
                 .orElseThrow(RuntimeException::new);
+
         Member member = savedToken.getMember();
         if (Objects.equals(member.getId(), memberId)) {
             if (refreshToken != null && jwtTokenProvider.validateToken(refreshToken)) {

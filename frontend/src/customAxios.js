@@ -7,10 +7,19 @@ const createAuthInstance = () => {
 
     const instance = axios.create({
         baseURL: "http://localhost:3000",
-        withCredentials: true,
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             "Content-Type": 'application/json'
+        }
+    })
+
+    return setInterceptors(instance)
+}
+
+const createFormInstance = () => {
+    const instance = axios.create({
+        baseURL: "http://localhost:3000",
+        headers: {
+            'Content-Type': 'multipart/form-data'
         }
     })
 
@@ -63,16 +72,16 @@ const setInterceptors = (instance) => {
 }
 
 const authInstance = createAuthInstance();
+const formInstance = createFormInstance();
 
 const instance = axios.create({
-    baseURL: "http://localhost:3000",
-    withCredentials: true
+    baseURL: "http://localhost:3000"
 })
 
 
 
-export const createMemberAPI = async (createMemberRequest) => {
-    return await instance.post("/api/members", createMemberRequest)
+export const createMemberAPI = (createMemberRequest) => {
+    return instance.post("/api/members", createMemberRequest)
 }
 
 export const loginAPI = (loginRequest) => {
@@ -89,4 +98,8 @@ export const refreshTokenAPI = (memberId) => {
 
 export const petsByMemberAPI = (memberId) => {
     return authInstance.get(`/api/pets/members/${memberId}`)
+}
+
+export const createPetAPI = (formData) => {
+    return formInstance.post("/api/pets", formData)
 }

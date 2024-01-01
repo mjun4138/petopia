@@ -56,7 +56,7 @@ public class InitDB {
         }
 
         public void PetInit() {
-            List<Pet> pets = IntStream.range(1, 11)
+            List<Pet> pets = IntStream.range(1, 4)
                     .mapToObj(i -> {
                         Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
                         return Pet.builder()

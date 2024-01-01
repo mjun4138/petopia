@@ -2,17 +2,16 @@ package com.miraclerun.petopia.controller;
 
 import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.dto.PetDto;
-import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreatePetRequest;
 import com.miraclerun.petopia.response.CreatePetResponse;
 import com.miraclerun.petopia.service.PetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,9 +22,12 @@ public class PetController {
     /**
      * 펫 등록
      */
-    @PostMapping("/pets")
-    public CreatePetResponse createPet(@RequestBody CreatePetRequest request) {
-        Long petId = petService.createPet(request);
+    @PostMapping(value = "/pets", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public CreatePetResponse createPet(
+            @RequestPart(name = "request") CreatePetRequest request,
+            @RequestPart(name = "file", required = false) MultipartFile file
+    ) throws IOException {
+        Long petId = petService.createPet(request, file);
 
         return CreatePetResponse.builder()
                 .id(petId)

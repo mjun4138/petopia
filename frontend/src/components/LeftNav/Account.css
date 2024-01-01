@@ -1,101 +1,15 @@
-.left-nav {
+
+.account {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
 }
-/**********************************************/
-.login-form {
+
+.account-form {
     width: 70%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-.login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-    width: 100%;
-}
-
-.login h1 {
-    margin-bottom: 50px;
-}
-
-.login input {
-    width: 97%;
-    height: 25px;
-    margin-bottom: 10px;
-
-}
-
-.login button {
-    width: 100%;
-    height: 35px;
-    margin: 10px 0 20px 0;
-    padding: 0;
-}
-
-.register {
-    padding: 20px 0 0 0;
-    width: 100%;
-    border-top: 1px solid lightgray;
-}
-/*==============================*/
-.signup-form {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.signup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-    width: 100%;
-}
-
-.signup h1 {
-    margin-bottom: 50px;
-}
-
-.signup input {
-    width: 97%;
-    height: 25px;
-    margin-bottom: 10px;
-
-}
-
-.signup button {
-    width: 100%;
-    height: 35px;
-    margin: 10px 0 20px 0;
-    padding: 0;
-}
-
-.signup-error {
-    color: red;
-    margin-bottom: 20px;
-    font-size: 11px;
-}
-
-/*==========================================*/
-.test-account {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-/*************************************************/
-.account {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .logo {
