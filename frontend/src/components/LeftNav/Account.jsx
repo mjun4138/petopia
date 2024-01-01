@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {logoutAPI, petsByMemberAPI} from "../../customAxios";
 import "./Account.css";
 
@@ -7,6 +7,7 @@ const Account = () => {
 
     const movePage = useNavigate();
     const memberId = JSON.parse(localStorage.getItem("memberData")).id
+    const location = useLocation();
     const [pets, setPets] = useState([])
 
 
@@ -23,7 +24,12 @@ const Account = () => {
     }
 
     const handleAddPet = () => {
-        movePage('add-pet', {state: {isPetAdd: true}})
+        movePage('add-pet')
+    }
+
+    const handlePetFeed = (pet) => {
+        movePage(`${pet.id}`, {state: pet})
+
     }
 
 
@@ -32,27 +38,27 @@ const Account = () => {
             try {
                 const response = await petsByMemberAPI(memberId.toString())
                 setPets(response.data)
+                console.log(location.state.isRender)
             } catch (error) {
                 console.log(error)
             }
         }
         fetchData()
-    }, [movePage])
+    }, [location.state?.isRender])
 
     return (
         <div className='account'>
             <nav className='account-form'>
 
                 <div className='logo'>
-                    <div className='logo-cursor' onClick={()=> movePage(`/account/${JSON.parse(localStorage.getItem('memberData')).account}`)}>
+                    <div className='logo-cursor' onClick={()=> movePage(`/account`)}>
                         <h1>petopia</h1>
                     </div>
                 </div>
 
                 <div className='user-profile'>
-                    <img src={`${process.env.PUBLIC_URL}/image/kang.jpg`} alt="user image"/>
                     <div className='user-name'>
-                        <h3>{JSON.parse(localStorage.getItem('memberData')).name}</h3>
+                        <h3>{JSON.parse(localStorage.getItem('memberData')).name}님, 반갑습니다.</h3>
                     </div>
                 </div>
 
@@ -63,7 +69,7 @@ const Account = () => {
                     ) : (
                         <>
                             {pets.map((pet, index) => (
-                                <div className='pet-item' key={index}>
+                                <div className='pet-item' key={index} onClick={() => handlePetFeed(pet)}>
                                     {pet.profileImage != null ? (
                                         <img src={`${process.env.PUBLIC_URL}/pet-image/${pet.profileImage}`} alt="pet image"/>
                                     ) : (

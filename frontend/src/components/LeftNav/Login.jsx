@@ -40,7 +40,7 @@ const Login = () => {
                 console.log(payload)
 
 
-                movePage(`/account/${payload.account}`)
+                movePage(`/account`, {replace:true})
 
             } catch (error) {
                 console.log(error)

@@ -6,6 +6,7 @@ import {createPetAPI} from "../../customAxios";
 const AddPet = () => {
     const movePage = useNavigate();
     const memberId = JSON.parse(localStorage.getItem('memberData')).id;
+    const memberAccount = JSON.parse(localStorage.getItem('memberData')).account;
     const [createPetRequest, setCreatePetRequest] = useState({
         memberId: memberId,
         name: '',
@@ -40,9 +41,8 @@ const AddPet = () => {
             formData.append('request', request)
             formData.append('file', file)
             await createPetAPI(formData)
-            console.log(formData)
 
-            movePage(-1)
+            movePage('/account', {state: {isRender: true}})
         } catch (error) {
             console.log(error);
             console.log(createPetRequest)
@@ -53,7 +53,7 @@ const AddPet = () => {
 
     return (
         <div className='add-pet'>
-            <div className='add-pet-back' onClick={() =>movePage(-1)}>
+            <div className='add-pet-back' onClick={() =>movePage(`/account`)}>
                 <img src={`${process.env.PUBLIC_URL}/image/back.png`}/>
             </div>
             <div className='add-pet-form'>
