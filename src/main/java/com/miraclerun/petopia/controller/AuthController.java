@@ -6,7 +6,10 @@ import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.request.LoginRequest;
 import com.miraclerun.petopia.service.MemberService;
 import com.miraclerun.petopia.service.RefreshTokenService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseCookie;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,9 +24,18 @@ public class AuthController {
      * 로그인
      */
     @PostMapping("/auth")
-    public JwtToken login(@RequestBody LoginRequest request) {
+    public JwtToken login(@RequestBody LoginRequest request, HttpServletResponse response) {
 
-        return memberService.login(request.getAccount(), request.getPassword());
+        JwtToken token = memberService.login(request.getAccount(), request.getPassword());
+        Cookie cookie = new Cookie("refreshToken", token.getRefreshToken());
+        cookie.setMaxAge(60 * 60 * 24 * 7);
+        cookie.setPath("/");
+        cookie.setSecure(false); //개발환경에서는 false
+        cookie.setHttpOnly(true);
+
+//        response.setHeader("Set-Cookie", cookie.getValue());
+        response.addCookie(cookie);
+        return token;
     }
 
     /**

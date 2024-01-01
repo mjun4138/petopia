@@ -14,6 +14,7 @@ public class PetDto {
     private int follower;
     private String createdAt;
     private String modifiedAt;
+    private String profileImage;
 
     public PetDto() {
     }
@@ -27,5 +28,8 @@ public class PetDto {
         follower = pet.getFollower();
         createdAt = pet.getCreatedAt();
         modifiedAt = pet.getModifiedAt();
+        if (pet.getPetUpload() != null) {
+            profileImage = pet.getPetUpload().getFileName();
+        }
     }
 }

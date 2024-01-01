@@ -1,8 +1,6 @@
 package com.miraclerun.petopia.config;
 
-import com.miraclerun.petopia.auth.JwtAuthenticationFilter;
-import com.miraclerun.petopia.auth.JwtExceptionFilter;
-import com.miraclerun.petopia.auth.JwtTokenProvider;
+import com.miraclerun.petopia.auth.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,13 +29,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(CsrfConfigurer::disable)
                 .sessionManagement(
-                        sessionManagement ->
-                                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        configurer ->
+                                configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .headers((headerConfig) ->
-                        headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                        headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable
+                        )
+                )
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
@@ -46,9 +47,11 @@ public class WebSecurityConfig {
 //                                .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-
+                .exceptionHandling(authenticationManager -> authenticationManager
+                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                        .accessDeniedHandler(new JwtAccessDeniedHandler()))
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-//                .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class)
+                .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class)
                 .build();
 
     }

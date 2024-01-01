@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 
 import {createMemberAPI, loginAPI} from "../../customAxios";
-import {useCookies} from "react-cookie";
+import {Cookies, useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 const Login = () => {
     const [showSignUpClick, setSignUpClick] = useState(false)
 
-    const [cookies, setCookie] = useCookies();
     const movePage = useNavigate();
 
     const LoginForm = () => {
@@ -29,10 +29,17 @@ const Login = () => {
                 const response = await loginAPI(loginRequest)
 
                 localStorage.setItem('accessToken', response.data.accessToken)
-                setCookie('refreshToken', response.data.refreshToken, {path: '/'})
+                const payload = jwtDecode(response.data.accessToken)
+                localStorage.setItem('memberData', JSON.stringify({
+                    id: parseInt(payload.sub),
+                    email: payload.email,
+                    account: payload.account,
+                    name: payload.name,
+                }))
+                console.log(payload)
 
 
-                movePage('/account')
+                movePage(`/account/${payload.account}`)
 
             } catch (error) {
                 console.log(error)
@@ -55,6 +62,13 @@ const Login = () => {
                 <div className='register'>
                     <span>계정이 없으신가요? </span>
                     <span style={{cursor: 'pointer', color: 'blue'}} onClick={() => setSignUpClick(true)}>회원가입</span>
+                </div>
+                <div className='test-account'>
+                    <br/>
+                    <br/>
+                    <span style={{marginBottom:'5px'}}>테스트 계정</span>
+                    <span>ID: test</span>
+                    <span>PW: test1234</span>
                 </div>
             </div>
         )

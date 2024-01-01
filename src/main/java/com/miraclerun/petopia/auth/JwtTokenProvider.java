@@ -27,8 +27,10 @@ import java.util.stream.Collectors;
 public class JwtTokenProvider {
 
     private static final String grantType = "Bearer";
+//    private static final Long accessTokenValidTime = 1000 * 5L; // 5초
     private static final Long accessTokenValidTime = 1000 * 60 * 30L; // 30분
-    private static final Long refreshTokenValidTime = 1000 * 60 * 60 * 24 * 30L; // 30일
+//    private static final Long refreshTokenValidTime = 1000 * 5L; // 5초
+    private static final Long refreshTokenValidTime = 1000 * 60 * 60 * 24 * 7L; // 30일
     private final Key key;
     private final MemberRepository memberRepository;
 

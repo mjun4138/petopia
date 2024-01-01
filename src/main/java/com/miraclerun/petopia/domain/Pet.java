@@ -21,6 +21,9 @@ public class Pet extends BaseTimeEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
+    @OneToOne(mappedBy = "pet", orphanRemoval = true)
+    private PetUpload petUpload;
+
     @Column(nullable = false)
     private String name;
 
@@ -63,4 +66,5 @@ public class Pet extends BaseTimeEntity {
     public void subFollower() {
         follower -= 1;
     }
+
 }

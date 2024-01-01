@@ -35,23 +35,30 @@ public class InitDB {
         private final PasswordEncoder encoder;
 
         public void MemberInit() {
-            List<Member> members = IntStream.range(1, 51)
-                    .mapToObj(i -> {
-                        return Member.builder()
-                                .email("test" + i + "@petopia.com")
-                                .name("petopia" + i)
-                                .account("ptaccount" + i)
-                                .password(encoder.encode("petopia123"))
-                                .build();
-                    })
-                    .toList();
-            memberRepository.saveAll(members);
+//            List<Member> members = IntStream.range(1, 51)
+//                    .mapToObj(i -> {
+//                        return Member.builder()
+//                                .email("test" + i + "@petopia.com")
+//                                .name("petopia" + i)
+//                                .account("ptaccount" + i)
+//                                .password(encoder.encode("petopia123"))
+//                                .build();
+//                    })
+//                    .toList();
+//            memberRepository.saveAll(members);
+            Member member = Member.builder()
+                    .email("test@test.com")
+                    .name("미라클")
+                    .account("test")
+                    .password(encoder.encode("test1234"))
+                    .build();
+            memberRepository.save(member);
         }
 
         public void PetInit() {
-            List<Pet> pets = IntStream.range(1, 51)
+            List<Pet> pets = IntStream.range(1, 11)
                     .mapToObj(i -> {
-                        Member member = memberRepository.findById((long) i).orElseThrow(RuntimeException::new);
+                        Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
                         return Pet.builder()
                                 .member(member)
                                 .name("펫" + i)

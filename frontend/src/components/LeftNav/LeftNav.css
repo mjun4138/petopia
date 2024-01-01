@@ -17,7 +17,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
-    width: 250px;
+    width: 100%;
 }
 
 .login h1 {
@@ -32,7 +32,7 @@
 }
 
 .login button {
-    width: 250px;
+    width: 100%;
     height: 35px;
     margin: 10px 0 20px 0;
     padding: 0;
@@ -40,10 +40,10 @@
 
 .register {
     padding: 20px 0 0 0;
-    width: 250px;
+    width: 100%;
     border-top: 1px solid lightgray;
 }
-
+/*==============================*/
 .signup-form {
     width: 70%;
     display: flex;
@@ -56,7 +56,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
-    width: 250px;
+    width: 100%;
 }
 
 .signup h1 {
@@ -71,7 +71,7 @@
 }
 
 .signup button {
-    width: 250px;
+    width: 100%;
     height: 35px;
     margin: 10px 0 20px 0;
     padding: 0;
@@ -83,6 +83,13 @@
     font-size: 11px;
 }
 
+/*==========================================*/
+.test-account {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 /*************************************************/
 .account {
     width: 70%;
@@ -179,6 +186,7 @@
     height: 40px;
     margin-bottom: 20px;
 }
+
 
 
 

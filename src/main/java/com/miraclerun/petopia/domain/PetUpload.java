@@ -1,23 +1,22 @@
 package com.miraclerun.petopia.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
-@Table(name = "upload")
-public class Upload {
+@Table(name = "pet_upload")
+public class PetUpload {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "upload_id")
+    @Column(name = "pet_upload_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "feed_id")
-    private Feed feed;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
     @Column(nullable = false)
     private String fileName;
@@ -28,15 +27,21 @@ public class Upload {
     @Column(nullable = false)
     private Long fileSize;
 
-    public Upload() {
+    public PetUpload() {
     }
 
     //==생성 메서드==//
     @Builder
-    public Upload(Feed feed, String fileName, String filePath, Long fileSize) {
-        this.feed = feed;
+    public PetUpload(Pet pet, String fileName, String filePath, Long fileSize) {
+        setPet(pet);
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileSize = fileSize;
+    }
+
+    //==연관관계 메서드=//
+    public void setPet(Pet pet) {
+        this.pet = pet;
+        pet.setPetUpload(this);
     }
 }

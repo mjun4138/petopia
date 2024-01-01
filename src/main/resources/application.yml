@@ -14,14 +14,15 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
+#        default_batch_fetch_size: 1000
         format_sql: true
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    org.hibernate.orm.jdbc.bind: trace
 
 upload:
-  path: C:\petopia_uploads\
+  path: C:\workspace_spring\petopia\frontend\public\pet-image
 
 jwt:
   secret: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwMzk2MzE3NSwiaWF0IjoxNzAzOTYzMTc1fQ.zbuEVY_B5WhW6uOXpN2O7GbaewFJF0Np43sBhLIrbIs
