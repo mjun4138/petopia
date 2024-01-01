@@ -2,6 +2,7 @@ package com.miraclerun.petopia.controller;
 
 import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.dto.PetDto;
+import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreatePetRequest;
 import com.miraclerun.petopia.response.CreatePetResponse;
 import com.miraclerun.petopia.service.PetService;
@@ -18,20 +19,21 @@ import java.util.List;
 @RequestMapping("/api")
 public class PetController {
     private final PetService petService;
+    private final PetRepository petRepository;
 
     /**
      * 펫 등록
      */
     @PostMapping(value = "/pets", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public CreatePetResponse createPet(
+    public PetDto createPet(
             @RequestPart(name = "request") CreatePetRequest request,
             @RequestPart(name = "file", required = false) MultipartFile file
     ) throws IOException {
         Long petId = petService.createPet(request, file);
+        Pet pet = petRepository.findById(petId)
+                .orElseThrow(RuntimeException::new);
 
-        return CreatePetResponse.builder()
-                .id(petId)
-                .build();
+        return new PetDto(pet);
     }
 
     /**
@@ -45,12 +47,25 @@ public class PetController {
     }
 
     /**
+     * 펫 단건 조회
+     */
+    @GetMapping("/pets/{petId}")
+    public PetDto pet(
+            @PathVariable Long petId
+    ) {
+        Pet pet = petService.pet(petId);
+
+        return new PetDto(pet);
+    }
+
+    /**
      * 회원별 펫 조회
      */
     @GetMapping("/pets/members/{memberId}")
     public List<PetDto> petsByMember(
             @PathVariable Long memberId
     ) {
+
         List<Pet> pets = petService.petsByMember(memberId);
         return pets.stream()
                 .map(PetDto::new)

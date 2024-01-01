@@ -28,7 +28,7 @@ const Account = () => {
     }
 
     const handlePetFeed = (pet) => {
-        movePage(`${pet.id}`, {state: pet})
+        movePage(`${pet.id}`, {state: {pet}})
 
     }
 
@@ -38,7 +38,8 @@ const Account = () => {
             try {
                 const response = await petsByMemberAPI(memberId.toString())
                 setPets(response.data)
-                console.log(location.state.isRender)
+
+                console.log(location.state?.isRender);
             } catch (error) {
                 console.log(error)
             }

@@ -116,3 +116,7 @@ export const petsByMemberAPI = (memberId) => {
 export const createPetAPI = (formData) => {
     return formInstance.post("/api/pets", formData)
 }
+
+export const getPetAPI = (petId) => {
+    return authInstance.get(`/api/pets/${petId}`)
+}

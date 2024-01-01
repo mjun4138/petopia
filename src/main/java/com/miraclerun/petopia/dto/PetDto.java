@@ -10,6 +10,7 @@ public class PetDto {
     private Long memberId;
     private String name;
     private String intro;
+    private int feedCount;
     private int following;
     private int follower;
     private String createdAt;

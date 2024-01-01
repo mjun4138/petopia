@@ -1,0 +1,62 @@
+
+.pet-feed {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pet-feed-form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.pet-feed-header {
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.pet-feed-image {
+    margin-top: 10px;
+    flex: 3;
+}
+
+.pet-feed-image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.pet-feed-info {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.pet-feed-info-name {
+    margin-right: auto;
+    font-weight: bold;
+}
+
+.pet-feed-info-follow {
+    width: 100%;
+    display: flex;
+    margin: 10px 0 10px 0;
+
+}
+.pet-feed-info-follow span {
+    flex-grow: 1;
+    display: flex;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.pet-feed-info-intro {
+    margin-right: auto;
+    font-weight: 600;
+}
+.pet-feed-info-intro pre {
+    text-align: left;
+}

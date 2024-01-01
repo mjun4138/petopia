@@ -67,14 +67,14 @@
     justify-content: center;
 }
 .add-pet-info input {
-    width: 60%;
+    width: 80%;
     height: 10px;
     padding: 10px;
 }
 .add-pet-info textarea {
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 60%;
+    width: 80%;
     height: 50px;
     padding: 10px;
 }

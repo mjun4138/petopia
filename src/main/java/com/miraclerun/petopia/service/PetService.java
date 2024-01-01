@@ -77,6 +77,14 @@ public class PetService {
     }
 
     /**
+     * 펫 단건 조회
+     */
+    public Pet pet(Long id) {
+        return petRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+    }
+
+    /**
      * 회원별 펫 조회
      */
     public List<Pet> petsByMember(Long memberId) {

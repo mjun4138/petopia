@@ -40,9 +40,11 @@ const AddPet = () => {
             const file = fileRequest
             formData.append('request', request)
             formData.append('file', file)
-            await createPetAPI(formData)
+            const response = await createPetAPI(formData)
+            console.log(response.data)
+            const petData = response.data
 
-            movePage('/account', {state: {isRender: true}})
+            movePage(`/account/${petData.id}`, {state: {isRender: true, pet: petData}, replace:true})
         } catch (error) {
             console.log(error);
             console.log(createPetRequest)
