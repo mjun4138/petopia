@@ -2,6 +2,7 @@ package com.miraclerun.petopia.controller;
 
 import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.dto.PetDto;
+import com.miraclerun.petopia.exception.PetNotFound;
 import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreatePetRequest;
 import com.miraclerun.petopia.request.DeletePetRequest;
@@ -32,7 +33,7 @@ public class PetController {
     ) throws IOException {
         Long petId = petService.createPet(request, file);
         Pet pet = petRepository.findById(petId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
 
         return new PetDto(pet);
     }

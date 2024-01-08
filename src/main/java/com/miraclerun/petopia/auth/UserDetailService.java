@@ -1,6 +1,7 @@
 package com.miraclerun.petopia.auth;
 
 import com.miraclerun.petopia.domain.Member;
+import com.miraclerun.petopia.exception.MemberNotFound;
 import com.miraclerun.petopia.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,7 @@ public class UserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
         Member member = memberRepository.findByAccount(account)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MemberNotFound::new);
 
         return new UserPrincipal(member);
 

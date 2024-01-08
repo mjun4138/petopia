@@ -2,6 +2,7 @@ package com.miraclerun.petopia.service;
 
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.domain.RefreshToken;
+import com.miraclerun.petopia.exception.RefreshTokenNotFound;
 import com.miraclerun.petopia.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class RefreshTokenService {
     @Transactional
     public void deleteToken(String refreshToken) {
         RefreshToken token = refreshTokenRepository.findRefreshTokenByRefreshToken(refreshToken)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(RefreshTokenNotFound::new);
         refreshTokenRepository.delete(token);
     }
 

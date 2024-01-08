@@ -3,6 +3,7 @@ package com.miraclerun.petopia.service;
 import com.miraclerun.petopia.domain.Feed;
 import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.domain.Upload;
+import com.miraclerun.petopia.exception.PetNotFound;
 import com.miraclerun.petopia.repository.FeedRepository;
 import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreateFeedRequest;
@@ -32,7 +33,7 @@ public class FeedService {
     public Long createFeed(CreateFeedRequest request, List<MultipartFile> files) throws IOException {
         Long petId = request.getPetId();
         Pet pet = petRepository.findById(petId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
 
         List<Upload> uploads = new ArrayList<>();
 

@@ -4,6 +4,7 @@ import com.miraclerun.petopia.auth.JwtToken;
 import com.miraclerun.petopia.auth.JwtTokenProvider;
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.domain.RefreshToken;
+import com.miraclerun.petopia.exception.MemberNotFound;
 import com.miraclerun.petopia.repository.MemberRepository;
 import com.miraclerun.petopia.request.CreateMemberRequest;
 import com.miraclerun.petopia.request.GetMembersRequest;
@@ -52,7 +53,7 @@ public class MemberService {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account, password);
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         Member member = memberRepository.findByAccount(account)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MemberNotFound::new);
 
         JwtToken token = jwtTokenProvider.generateToken(member.getId(), authentication);
         refreshTokenService.deleteTokenByMember(member);
@@ -70,7 +71,7 @@ public class MemberService {
      */
     public Member getMember(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MemberNotFound::new);
     }
 
     /**
@@ -96,7 +97,7 @@ public class MemberService {
     @Transactional
     public void deleteMember(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MemberNotFound::new);
         memberRepository.delete(member);
     }
 }

@@ -1,6 +1,8 @@
 package com.miraclerun.petopia;
 
 import com.miraclerun.petopia.domain.*;
+import com.miraclerun.petopia.exception.MemberNotFound;
+import com.miraclerun.petopia.exception.PetNotFound;
 import com.miraclerun.petopia.repository.FeedRepository;
 import com.miraclerun.petopia.repository.MemberRepository;
 import com.miraclerun.petopia.repository.PetRepository;
@@ -61,7 +63,7 @@ public class InitDB {
         }
 
         public void PetInit() {
-            Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
+            Member member = memberRepository.findById(1L).orElseThrow(MemberNotFound::new);
             for (int i = 1; i < 4; i++) {
                 Pet pet = Pet.builder()
                         .member(member)
@@ -90,7 +92,7 @@ public class InitDB {
                     })
                     .collect(Collectors.toList());
 
-            Pet pet = petRepository.findById(1L).orElseThrow(RuntimeException::new);
+            Pet pet = petRepository.findById(1L).orElseThrow(PetNotFound::new);
 
             Feed feed = Feed.builder()
                     .content("게시글입니다.")

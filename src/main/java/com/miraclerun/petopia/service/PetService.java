@@ -4,6 +4,9 @@ import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.domain.PetUpload;
 import com.miraclerun.petopia.domain.Upload;
+import com.miraclerun.petopia.exception.InvalidPassword;
+import com.miraclerun.petopia.exception.MemberNotFound;
+import com.miraclerun.petopia.exception.PetNotFound;
 import com.miraclerun.petopia.repository.MemberRepository;
 import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.repository.PetUploadRepository;
@@ -40,7 +43,7 @@ public class PetService {
     @Transactional
     public Long createPet(CreatePetRequest request,  MultipartFile file) throws IOException {
         Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MemberNotFound::new);
 
         Pet pet = Pet.builder()
                 .member(member)
@@ -74,9 +77,9 @@ public class PetService {
     @Transactional
     public void deletePet(Long petId, DeletePetRequest request) {
         Pet pet = petRepository.findById(petId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
         if (!encoder.matches(request.getPassword(), pet.getMember().getPassword())) {
-            throw new RuntimeException();
+            throw new InvalidPassword("password", "비밀번호가 일치하지 않습니다.");
         }
 
         petRepository.delete(pet);
@@ -87,7 +90,7 @@ public class PetService {
      */
     public Pet pet(Long id) {
         return petRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
     }
 
     /**
@@ -103,7 +106,7 @@ public class PetService {
     @Transactional
     public void setImage(Long petId, MultipartFile file) throws IOException {
         Pet pet = petRepository.findById(petId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
 
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         File saveFile = new File(uploadPath, fileName);

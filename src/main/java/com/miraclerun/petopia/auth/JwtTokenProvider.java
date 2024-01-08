@@ -1,6 +1,7 @@
 package com.miraclerun.petopia.auth;
 
 import com.miraclerun.petopia.domain.Member;
+import com.miraclerun.petopia.exception.MemberNotFound;
 import com.miraclerun.petopia.repository.MemberRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -47,7 +48,7 @@ public class JwtTokenProvider {
                 .collect(Collectors.joining(","));
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MemberNotFound::new);
 
         //Access Token
         String accessToken = Jwts.builder()

@@ -2,6 +2,8 @@ package com.miraclerun.petopia.service;
 
 import com.miraclerun.petopia.domain.Follow;
 import com.miraclerun.petopia.domain.Pet;
+import com.miraclerun.petopia.exception.FollowNotFound;
+import com.miraclerun.petopia.exception.PetNotFound;
 import com.miraclerun.petopia.repository.FollowRepository;
 import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreateFollowRequest;
@@ -24,9 +26,9 @@ public class FollowService {
     @Transactional
     public Long createFollow(CreateFollowRequest request) {
         Pet following = petRepository.findById(request.getFollowing_id())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
         Pet follower = petRepository.findById(request.getFollower_id())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
 
         Follow follow = Follow.builder()
                 .following(following)
@@ -45,11 +47,11 @@ public class FollowService {
     @Transactional
     public void deleteFollow(Long id) {
         Follow follow = followRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(FollowNotFound::new);
         Pet following = petRepository.findById(follow.getFollowing().getId())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
         Pet follower = petRepository.findById(follow.getFollower().getId())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(PetNotFound::new);
         followRepository.delete(follow);
         following.subFollowing();
         follower.subFollower();

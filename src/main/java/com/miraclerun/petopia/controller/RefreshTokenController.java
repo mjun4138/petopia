@@ -4,6 +4,7 @@ import com.miraclerun.petopia.auth.JwtToken;
 import com.miraclerun.petopia.auth.JwtTokenProvider;
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.domain.RefreshToken;
+import com.miraclerun.petopia.exception.RefreshTokenNotFound;
 import com.miraclerun.petopia.repository.RefreshTokenRepository;
 import com.miraclerun.petopia.request.RefreshTokenRequest;
 import com.miraclerun.petopia.service.RefreshTokenService;
@@ -35,7 +36,7 @@ public class RefreshTokenController {
         )
     {
         RefreshToken savedToken = refreshTokenRepository.findRefreshTokenByRefreshToken(refreshToken)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(RefreshTokenNotFound::new);
 
         Member member = savedToken.getMember();
         if (Objects.equals(member.getId(), memberId)) {
@@ -60,7 +61,7 @@ public class RefreshTokenController {
 //    public ResponseEntity<JwtToken> refresh(@PathVariable Long memberId, @RequestBody RefreshTokenRequest request) {
 //        String refreshToken = request.getRefreshToken();
 //        RefreshToken savedToken = refreshTokenRepository.findRefreshTokenByRefreshToken(refreshToken)
-//                .orElseThrow(RuntimeException::new);
+//                .orElseThrow(RefreshTokenNotFound::new);
 //        Member member = savedToken.getMember();
 //        if (Objects.equals(member.getId(), memberId)) {
 //            if (refreshToken != null && jwtTokenProvider.validateToken(refreshToken)) {
@@ -81,7 +82,7 @@ public class RefreshTokenController {
 //    @PostMapping("/refresh-tokens/{memberId}")
 //    public JwtToken refreshToken(@PathVariable Long memberId, @CookieValue String refreshToken) {
 //        RefreshToken token = refreshTokenRepository.findRefreshTokenByRefreshToken(refreshToken)
-//                .orElseThrow(RuntimeException::new);
+//                .orElseThrow(RefreshTokenNotFound::new);
 //        if (jwtTokenProvider.validateToken(refreshToken)) {
 //            Authentication authentication = jwtTokenProvider.getAuthentication(refreshToken);
 //            JwtToken newToken = jwtTokenProvider.generateToken(memberId, authentication);
