@@ -31,7 +31,7 @@ public class FollowController {
      */
     @DeleteMapping("/follows/{followId}")
     public void deleteFollow(
-            @PathVariable Long followId
+            @PathVariable(name = "followId") Long followId
     ) {
         followService.deleteFollow(followId);
     }

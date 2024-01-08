@@ -41,7 +41,7 @@ public class PetController {
      */
     @DeleteMapping("/pets/{petId}")
     public void deletePet(
-            @PathVariable Long petId
+            @PathVariable(name = "petId") Long petId
     ) {
         petService.deletePet(petId);
     }
@@ -51,7 +51,7 @@ public class PetController {
      */
     @GetMapping("/pets/{petId}")
     public PetDto pet(
-            @PathVariable Long petId
+            @PathVariable(name = "petId") Long petId
     ) {
         Pet pet = petService.pet(petId);
 
@@ -63,7 +63,7 @@ public class PetController {
      */
     @GetMapping("/pets/members/{memberId}")
     public List<PetDto> petsByMember(
-            @PathVariable Long memberId
+            @PathVariable(name = "memberId") Long memberId
     ) {
 
         List<Pet> pets = petService.petsByMember(memberId);
@@ -77,8 +77,8 @@ public class PetController {
      */
     @PostMapping("/pets/{petId}/pet-uploads")
     public void setImage(
-            @PathVariable Long petId,
-            @RequestPart MultipartFile file
+            @PathVariable(name = "petId") Long petId,
+            @RequestPart(name = "file") MultipartFile file
     ) throws IOException {
         petService.setImage(petId, file);
     }

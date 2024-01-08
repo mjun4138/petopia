@@ -39,7 +39,7 @@ public class MemberController {
      * 회원 단건 조회
      */
     @GetMapping("/members/{memberId}")
-    public MemberDto member(@PathVariable Long memberId) {
+    public MemberDto member(@PathVariable(name = "memberId") Long memberId) {
         Member member = memberService.getMember(memberId);
 
         return new MemberDto(member);
@@ -49,7 +49,7 @@ public class MemberController {
      * 회원 전체 조회
      */
     @GetMapping("/members")
-    public GetMembersResponse members(@RequestParam int page) {
+    public GetMembersResponse members(@RequestParam(name = "page") int page) {
         GetMembersRequest request = GetMembersRequest.builder()
                 .page(page)
                 .build();
@@ -70,7 +70,7 @@ public class MemberController {
      * 회원 탈퇴
      */
     @DeleteMapping("/members/{memberId}")
-    public void delete(@PathVariable Long memberId) {
+    public void delete(@PathVariable(name = "memberId") Long memberId) {
 
         memberService.deleteMember(memberId);
     }

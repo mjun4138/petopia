@@ -30,7 +30,7 @@ public class RefreshTokenController {
      */
     @PostMapping(value = "/refresh-tokens/members/{memberId}")
     public ResponseEntity<String> refresh(
-            @PathVariable Long memberId,
+            @PathVariable(name = "memberId") Long memberId,
             @CookieValue(value = "refreshToken", required = false) String refreshToken
         )
     {
