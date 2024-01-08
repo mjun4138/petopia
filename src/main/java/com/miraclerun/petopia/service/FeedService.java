@@ -24,7 +24,7 @@ import java.util.UUID;
 public class FeedService {
     private final PetRepository petRepository;
     private final FeedRepository feedRepository;
-    @Value("${upload.path}") private String uploadPath;
+    @Value("${feed-upload.path}") private String uploadPath;
 
     /**
      * 피드 등록

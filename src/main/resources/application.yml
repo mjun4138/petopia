@@ -21,7 +21,9 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
 
-upload:
+feed-upload:
+  path: C:\workspace_spring\petopia\frontend\public\feed-image
+pet-upload:
   path: C:\workspace_spring\petopia\frontend\public\pet-image
 
 jwt:

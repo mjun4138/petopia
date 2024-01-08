@@ -29,7 +29,7 @@ public class PetService {
     private final MemberRepository memberRepository;
     private final PetRepository petRepository;
     private final PetUploadRepository petUploadRepository;
-    @Value("${upload.path}") private String uploadPath;
+    @Value("${pet-upload.path}") private String uploadPath;
 
     /**
      * 펫 등록
