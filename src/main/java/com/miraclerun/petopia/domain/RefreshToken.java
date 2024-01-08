@@ -31,6 +31,12 @@ public class RefreshToken {
         this.refreshToken = refreshToken;
     }
 
+    //==연관관계 메서드==//
+    public void setMember(Member member) {
+        this.member = member;
+        member.setRefreshToken(this);
+    }
+
     public void updateToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }

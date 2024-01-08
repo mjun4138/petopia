@@ -22,6 +22,9 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Pet> pets;
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private RefreshToken refreshToken;
+
     @Column(nullable = false, unique = true)
     private String email;
 
