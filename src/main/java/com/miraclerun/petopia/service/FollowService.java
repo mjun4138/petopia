@@ -5,6 +5,8 @@ import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.repository.FollowRepository;
 import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreateFollowRequest;
+import com.miraclerun.petopia.request.GetFollowRequest;
+import com.miraclerun.petopia.response.GetFollowResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,5 +54,22 @@ public class FollowService {
         following.subFollowing();
         follower.subFollower();
 
+    }
+
+    /**
+     * 팔로우 조회
+     */
+    public GetFollowResponse getFollow(GetFollowRequest request) {
+        Follow follow = followRepository.getFollow(request);
+        if (follow != null) {
+            return GetFollowResponse.builder()
+                    .isFollowed(true)
+                    .followId(follow.getId())
+                    .build();
+        } else {
+            return GetFollowResponse.builder()
+                    .isFollowed(false)
+                    .build();
+        }
     }
 }
