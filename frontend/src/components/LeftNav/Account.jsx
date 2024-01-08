@@ -39,7 +39,6 @@ const Account = () => {
                 const response = await petsByMemberAPI(memberId.toString())
                 setPets(response.data)
 
-                console.log(location.state?.isRender);
             } catch (error) {
                 console.log(error)
             }

@@ -39,27 +39,24 @@ const setInterceptors = (instance) => {
                     localStorage.setItem('accessToken', response.data)
                     const newToken = localStorage.getItem('accessToken')
                     config.headers.Authorization = `Bearer ${newToken}`
-                    console.log("인터셉트0")
                 } else {
                     const currentTime = Math.floor(Date.now() / 1000);
                     const exp = jwtDecode(token).exp
 
                     if (exp >= currentTime) {
                         config.headers.Authorization = `Bearer ${token}`
-                        console.log("인터셉트1")
                     } else {
                         const response = await refreshTokenAPI(memberId)
 
                         localStorage.setItem('accessToken', response.data)
                         const newToken = localStorage.getItem('accessToken')
                         config.headers.Authorization = `Bearer ${newToken}`
-                        console.log("인터셉트2")
 
                     }
                 }
 
             } catch (error) {
-                if (error.response.status === 401) {
+                if (error.response.status === 401 || error.response.status === 404) {
                     window.location.href = '/'
                 }
                 console.log(error);

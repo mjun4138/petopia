@@ -20,7 +20,7 @@ const Login = () => {
         const handleChange = (e) => {
             setLoginRequest({
                 ...loginRequest,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value.trim()
             })
         }
 
@@ -36,8 +36,6 @@ const Login = () => {
                     account: payload.account,
                     name: payload.name,
                 }))
-                console.log(payload)
-
 
                 movePage(`/account`, {state:{isRender:true}, replace:true})
 
