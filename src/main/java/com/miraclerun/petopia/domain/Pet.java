@@ -25,7 +25,7 @@ public class Pet extends BaseTimeEntity {
     @OneToOne(mappedBy = "pet", orphanRemoval = true)
     private PetUpload petUpload;
 
-    @OneToMany(mappedBy = "pet")
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE)
     private List<Feed> feeds;
 
     @Column(nullable = false)
