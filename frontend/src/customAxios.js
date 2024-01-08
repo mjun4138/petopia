@@ -91,7 +91,7 @@ const instance = axios.create({
     baseURL: "http://localhost:3000"
 })
 
-
+// instance(인증필요X) authInstance(인증필요O) formInstance(인증필요O, 업로드 관련O)
 
 export const createMemberAPI = (createMemberRequest) => {
     return instance.post("/api/members", createMemberRequest)
@@ -102,7 +102,7 @@ export const loginAPI = (loginRequest) => {
 }
 
 export const logoutAPI = (memberId) => {
-    return authInstance.post(`/api/auth/${memberId}`)
+    return authInstance.post(`/api/auth/members/${memberId}`)
 }
 
 export const refreshTokenAPI = (memberId) => {
@@ -119,4 +119,8 @@ export const createPetAPI = (formData) => {
 
 export const getPetAPI = (petId) => {
     return authInstance.get(`/api/pets/${petId}`)
+}
+
+export const followAPI = (followRequest) => {
+    return authInstance.post("/api/follows", followRequest)
 }
