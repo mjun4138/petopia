@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Persistable;
 
+import java.util.List;
+
 @Entity
 @Getter @Setter
 @Table(name = "member")
@@ -16,6 +18,9 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Pet> pets;
 
     @Column(nullable = false, unique = true)
     private String email;
