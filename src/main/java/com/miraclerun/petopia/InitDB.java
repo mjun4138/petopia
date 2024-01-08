@@ -1,9 +1,10 @@
 package com.miraclerun.petopia;
 
-import com.miraclerun.petopia.domain.Member;
-import com.miraclerun.petopia.domain.Pet;
+import com.miraclerun.petopia.domain.*;
+import com.miraclerun.petopia.repository.FeedRepository;
 import com.miraclerun.petopia.repository.MemberRepository;
 import com.miraclerun.petopia.repository.PetRepository;
+import com.miraclerun.petopia.repository.PetUploadRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
@@ -23,6 +25,7 @@ public class InitDB {
     public void MemberInit() {
         initService.MemberInit();
         initService.PetInit();
+        initService.FeedInit();
     }
 
     @Component
@@ -32,6 +35,8 @@ public class InitDB {
 
         private final MemberRepository memberRepository;
         private final PetRepository petRepository;
+        private final FeedRepository feedRepository;
+        private final PetUploadRepository petUploadRepository;
         private final PasswordEncoder encoder;
 
         public void MemberInit() {
@@ -56,17 +61,45 @@ public class InitDB {
         }
 
         public void PetInit() {
-            List<Pet> pets = IntStream.range(1, 4)
+            Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
+            for (int i = 1; i < 4; i++) {
+                Pet pet = Pet.builder()
+                        .member(member)
+                        .name("펫" + i)
+                        .intro("안녕하세요" + i)
+                        .build();
+                petRepository.save(pet);
+                PetUpload petUpload = PetUpload.builder()
+                        .fileName("pet" + i + ".jpg")
+                        .filePath("/uploads/" + "pet" + i + ".jpg")
+                        .fileSize(1000L)
+                        .pet(pet)
+                        .build();
+                petUploadRepository.save(petUpload);
+            }
+        }
+
+        public void FeedInit() {
+            List<Upload> uploads = IntStream.range(1, 5)
                     .mapToObj(i -> {
-                        Member member = memberRepository.findById(1L).orElseThrow(RuntimeException::new);
-                        return Pet.builder()
-                                .member(member)
-                                .name("펫" + i)
-                                .intro("안녕하세요" + i)
+                        return Upload.builder()
+                                .fileName("feed" + i + ".jpg")
+                                .filePath("/uploads/" + "feed" + i + ".jpg")
+                                .fileSize(1000L)
                                 .build();
                     })
-                    .toList();
-            petRepository.saveAll(pets);
+                    .collect(Collectors.toList());
+
+            Pet pet = petRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+            Feed feed = Feed.builder()
+                    .content("게시글입니다.")
+                    .uploads(uploads)
+                    .pet(pet)
+                    .build();
+            feedRepository.save(feed);
+
+
         }
     }
 
