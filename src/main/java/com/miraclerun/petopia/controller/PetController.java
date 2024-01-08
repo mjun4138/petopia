@@ -4,6 +4,7 @@ import com.miraclerun.petopia.domain.Pet;
 import com.miraclerun.petopia.dto.PetDto;
 import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.request.CreatePetRequest;
+import com.miraclerun.petopia.request.DeletePetRequest;
 import com.miraclerun.petopia.response.CreatePetResponse;
 import com.miraclerun.petopia.service.PetService;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,10 @@ public class PetController {
      */
     @DeleteMapping("/pets/{petId}")
     public void deletePet(
-            @PathVariable(name = "petId") Long petId
-    ) {
-        petService.deletePet(petId);
+            @PathVariable(name = "petId") Long petId,
+            @RequestBody DeletePetRequest request
+            ) {
+        petService.deletePet(petId, request);
     }
 
     /**

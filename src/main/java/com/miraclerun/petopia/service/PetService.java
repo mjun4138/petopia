@@ -9,9 +9,11 @@ import com.miraclerun.petopia.repository.PetRepository;
 import com.miraclerun.petopia.repository.PetUploadRepository;
 import com.miraclerun.petopia.repository.UploadRepository;
 import com.miraclerun.petopia.request.CreatePetRequest;
+import com.miraclerun.petopia.request.DeletePetRequest;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,7 @@ public class PetService {
     private final MemberRepository memberRepository;
     private final PetRepository petRepository;
     private final PetUploadRepository petUploadRepository;
+    private final PasswordEncoder encoder;
     @Value("${pet-upload.path}") private String uploadPath;
 
     /**
@@ -69,9 +72,12 @@ public class PetService {
      * 펫 삭제
      */
     @Transactional
-    public void deletePet(Long id) {
-        Pet pet = petRepository.findById(id)
+    public void deletePet(Long petId, DeletePetRequest request) {
+        Pet pet = petRepository.findById(petId)
                 .orElseThrow(RuntimeException::new);
+        if (!encoder.matches(request.getPassword(), pet.getMember().getPassword())) {
+            throw new RuntimeException();
+        }
 
         petRepository.delete(pet);
     }
