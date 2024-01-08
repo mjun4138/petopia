@@ -4,6 +4,7 @@ import com.miraclerun.petopia.auth.JwtToken;
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.dto.MemberDto;
 import com.miraclerun.petopia.request.CreateMemberRequest;
+import com.miraclerun.petopia.request.DeleteMemberRequest;
 import com.miraclerun.petopia.request.GetMembersRequest;
 import com.miraclerun.petopia.request.LoginRequest;
 import com.miraclerun.petopia.response.CreateMemberResponse;
@@ -70,8 +71,10 @@ public class MemberController {
      * 회원 탈퇴
      */
     @DeleteMapping("/members/{memberId}")
-    public void delete(@PathVariable(name = "memberId") Long memberId) {
-
-        memberService.deleteMember(memberId);
+    public void delete(
+            @PathVariable(name = "memberId") Long memberId,
+            @RequestBody DeleteMemberRequest request
+            ) {
+        memberService.deleteMember(memberId, request);
     }
 }

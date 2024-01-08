@@ -4,9 +4,11 @@ import com.miraclerun.petopia.auth.JwtToken;
 import com.miraclerun.petopia.auth.JwtTokenProvider;
 import com.miraclerun.petopia.domain.Member;
 import com.miraclerun.petopia.domain.RefreshToken;
+import com.miraclerun.petopia.exception.InvalidPassword;
 import com.miraclerun.petopia.exception.MemberNotFound;
 import com.miraclerun.petopia.repository.MemberRepository;
 import com.miraclerun.petopia.request.CreateMemberRequest;
+import com.miraclerun.petopia.request.DeleteMemberRequest;
 import com.miraclerun.petopia.request.GetMembersRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -95,9 +97,12 @@ public class MemberService {
      * 회원 삭제
      */
     @Transactional
-    public void deleteMember(Long id) {
-        Member member = memberRepository.findById(id)
+    public void deleteMember(Long memberId, DeleteMemberRequest request) {
+        Member member = memberRepository.findById(memberId)
                 .orElseThrow(MemberNotFound::new);
+        if (!encoder.matches(request.getPassword(), member.getPassword())) {
+            throw new InvalidPassword("password", "비밀번호가 일치하지 않습니다.");
+        }
         memberRepository.delete(member);
     }
 }
