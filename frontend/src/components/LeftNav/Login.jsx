@@ -90,13 +90,13 @@ const Login = () => {
         const handleChange = (e) => {
             setCreateMemberRequest({
                 ...createMemberRequest,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value.trim()
             })
         }
 
         const createMember = async () => {
             try {
-                createMemberAPI(createMemberRequest)
+                await createMemberAPI(createMemberRequest)
                 setSignUpClick(false)
                 alert("가입이 완료되었습니다.")
             } catch (error) {
@@ -117,7 +117,7 @@ const Login = () => {
             <div className='signup-form'>
                 <div className='signup'>
                     <h1>petopia</h1>
-                    <input type="email" name="email" value={createMemberRequest.email} placeholder='이메일' onChange={handleChange}/>
+                    <input type="text" name="email" value={createMemberRequest.email} placeholder='이메일' onChange={handleChange}/>
                     <input type="text" name="name" value={createMemberRequest.name} placeholder='성명' onChange={handleChange}/>
                     <input type="text" name="account" value={createMemberRequest.account} placeholder='아이디' onChange={handleChange}/>
                     <input type="password" name="password" value={createMemberRequest.password} placeholder='비밀번호' onChange={handleChange}/>

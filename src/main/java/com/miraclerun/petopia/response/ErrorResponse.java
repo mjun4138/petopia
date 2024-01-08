@@ -18,7 +18,12 @@ public class ErrorResponse {
     public ErrorResponse(String code, String message, Map<String, String> validation) {
         this.code = code;
         this.message = message;
-        this.validation = validation;
+        this.validation = (validation != null) ? validation : new HashMap<>();
+//        if (validation != null) {
+//            this.validation = validation;
+//        } else {
+//            this.validation = new HashMap<>();
+//        }
     }
 
     public void addValidation(String filedName, String errorMessage) {
