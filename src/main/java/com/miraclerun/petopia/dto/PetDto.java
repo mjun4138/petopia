@@ -19,7 +19,6 @@ public class PetDto {
     private String createdAt;
     private String modifiedAt;
     private String profileImage;
-    private List<FeedDto> feeds;
 
     public PetDto() {
     }
@@ -40,11 +39,6 @@ public class PetDto {
         modifiedAt = pet.getModifiedAt();
         if (pet.getPetUpload() != null) {
             profileImage = pet.getPetUpload().getFileName();
-        }
-        if (pet.getFeeds() != null) {
-            feeds = pet.getFeeds().stream()
-                    .map(FeedDto::new)
-                    .collect(Collectors.toList());
         }
     }
 }
