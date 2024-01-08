@@ -41,7 +41,7 @@ public class AuthController {
     /**
      * 로그아웃
      */
-    @PostMapping("/auth/{memberId}")
+    @PostMapping("/auth/members/{memberId}")
     public void logout(@PathVariable(name = "memberId") Long memberId) {
         Member member = memberService.getMember(memberId);
         refreshTokenService.deleteTokenByMember(member);
