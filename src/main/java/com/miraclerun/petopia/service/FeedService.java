@@ -61,4 +61,17 @@ public class FeedService {
         return feed.getId();
     }
 
+    /**
+     * 펫별 피드 조회
+     */
+    public List<Feed> feedsByPet(Long petId) {
+        return feedRepository.feedsByPet(petId);
+    }
+
+    /**
+     * 펫별 피드 수 조회
+     */
+    public int feedsCountByPet(Long petId) {
+        return feedRepository.feedsCountByPet(petId);
+    }
 }

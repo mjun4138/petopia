@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,9 @@ public class Pet extends BaseTimeEntity {
 
     @OneToOne(mappedBy = "pet", orphanRemoval = true)
     private PetUpload petUpload;
+
+    @OneToMany(mappedBy = "pet")
+    private List<Feed> feeds;
 
     @Column(nullable = false)
     private String name;
@@ -51,6 +55,7 @@ public class Pet extends BaseTimeEntity {
         if (petUpload != null) {
             setPetUpload(petUpload);
         }
+        feeds = new ArrayList<>();
     }
 
     //==연관관계 메서드==//
