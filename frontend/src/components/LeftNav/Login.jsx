@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 
 import {createMemberAPI, loginAPI} from "../../customAxios";
-import {Cookies, useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import "./Login.css";
@@ -40,7 +39,7 @@ const Login = () => {
                 console.log(payload)
 
 
-                movePage(`/account`, {replace:true})
+                movePage(`/account`, {state:{isRender:true}, replace:true})
 
             } catch (error) {
                 console.log(error)
@@ -99,7 +98,7 @@ const Login = () => {
 
         const createMember = async () => {
             try {
-                const response = createMemberAPI(createMemberRequest)
+                createMemberAPI(createMemberRequest)
                 setSignUpClick(false)
                 alert("가입이 완료되었습니다.")
             } catch (error) {
